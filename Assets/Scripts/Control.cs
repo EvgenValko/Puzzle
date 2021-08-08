@@ -7,9 +7,7 @@ public class Control : MonoBehaviour
     private Vector2 _startPozition;
     private Coordinates _coordinates;
     private bool _isJoin;
-
     public Matrix _matrix;
-
     public Coordinates Point { get => _coordinates; }
    
     void Update()
@@ -77,8 +75,7 @@ public class Control : MonoBehaviour
             foreach (var item in parentPoz.transform.GetComponentsInChildren<Control>())
             {
                 _matrix.controls.Add(item);
-            }
-          _matrix.AddFigure();
+            }        
         }
 
         return isJoin;

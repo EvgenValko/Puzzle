@@ -10,10 +10,13 @@ public class Matrix : MonoBehaviour
     private int _gorizontalElement;
     private int _verticalElement;
     private float _scale;
-    GameObject[] _figures;
+    GameObject[] _figuresPrefab;
     Transform[] _spawnPozition;
 
+    private List<GameObject> _figures = new List<GameObject>(); 
+
     public List<Control> controls = new List<Control>();
+
        
     public int Gorizontal{ get => _gorizontalElement; }
     public int Vertical { get => _verticalElement; }
@@ -23,7 +26,7 @@ public class Matrix : MonoBehaviour
         _matrixElement = matrixSiting.MatrixElement;     
         _parent = matrixSiting.Parent;
         _gorizontalElement = matrixSiting.GorizontalElement;
-        _figures = matrixSiting.Figures;
+        _figuresPrefab = matrixSiting.Figures;
         _spawnPozition = matrixSiting.SpawnPozition;
         CreateMatrix();
     }
@@ -53,15 +56,41 @@ public class Matrix : MonoBehaviour
         AddFigure();
     }
 
-    public void AddFigure()
+    private void AddFigure()
     {
-        GameObject go = Instantiate(_figures[Random.Range(0, _figures.Length)], _spawnPozition[0].position, Quaternion.identity);
-        go.transform.localScale *= _scale;
-        go.transform.parent = _parent;
-
-        foreach (var item in go.transform.GetComponentsInChildren<Control>())
+        foreach (var spawnPoz in _spawnPozition)
         {
-            item._matrix = this;
+            GameObject go = Instantiate(_figuresPrefab[Random.Range(0, _figuresPrefab.Length)], spawnPoz.position, Quaternion.identity);
+            go.transform.localScale *= _scale;
+            go.transform.parent = _parent;
+
+            foreach (var item in go.transform.GetComponentsInChildren<Control>())
+            {
+                item._matrix = this;
+            }
+            _figures.Add(go);
         }
+    }
+
+    private void RemuveFigure()
+    {
+        if (_figures.Count > 0)
+        {
+            _figures.RemoveAt(_figures.Count - 1);          
+        }
+        if(_figures.Count == 0)
+        {
+            AddFigure();
+        }  
+    }
+
+    private void OnEnable()
+    {
+        GameEvent.OnJoin += RemuveFigure;
+    }
+
+    private void OnDisable()
+    {
+        GameEvent.OnJoin -= RemuveFigure;
     }
 }

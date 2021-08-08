@@ -416,16 +416,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _matrixSiting: {fileID: 11400000, guid: e4fd82f40c8567041b09d138c087081a, type: 2}
-  _figures:
-  - {fileID: 4709095861466327641, guid: e10a4481d7e23884198865ca8911a72b, type: 3}
-  - {fileID: 5673347399169752524, guid: de37124839a25254a93581a49ad9591b, type: 3}
-  - {fileID: 3262891084027296217, guid: abaa08081a846264a8b889ee9995aac0, type: 3}
-  _spawn: {fileID: 1558237454}
---- !u!4 &1558237454 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 6394632874235957777, guid: 71274a3fc214b164f87f079a7c29849f, type: 3}
-  m_PrefabInstance: {fileID: 6394632875500520223}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2084094062
 GameObject:
   m_ObjectHideFlags: 0
@@ -547,12 +537,20 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6394632874235957777, guid: 71274a3fc214b164f87f079a7c29849f, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 4.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6394632874235957777, guid: 71274a3fc214b164f87f079a7c29849f, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6394632874235957777, guid: 71274a3fc214b164f87f079a7c29849f, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.0179
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6394632874235957777, guid: 71274a3fc214b164f87f079a7c29849f, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -3.5
+      value: -3.25
       objectReference: {fileID: 0}
     - target: {fileID: 6394632874235957777, guid: 71274a3fc214b164f87f079a7c29849f, type: 3}
       propertyPath: m_LocalPosition.z

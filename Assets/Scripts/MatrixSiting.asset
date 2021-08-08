@@ -15,10 +15,16 @@ MonoBehaviour:
   _matrixElement: {fileID: 4829216400391359424, guid: 106b89e266775634aa86e87de2595ec5, type: 3}
   _backgroundMatrix: {fileID: 2305340549250274020, guid: 50a5ce7c228fbb64ebc2f70197450236, type: 3}
   _parent: {fileID: 6404220055718334116, guid: e4659093abfc00b409de6dd4207b9d34, type: 3}
-  _gorizontalElement: 6
+  _gorizontalElement: 10
   _figures:
   - {fileID: 4709095861466327641, guid: e10a4481d7e23884198865ca8911a72b, type: 3}
   - {fileID: 5673347399169752524, guid: de37124839a25254a93581a49ad9591b, type: 3}
   - {fileID: 3262891084027296217, guid: abaa08081a846264a8b889ee9995aac0, type: 3}
+  - {fileID: 5230043448602301583, guid: 631b74b3da076e747879d6ebaf85b9dd, type: 3}
+  - {fileID: 536244122959769902, guid: 3df892f51c17183449c06e3eeefadcce, type: 3}
+  - {fileID: 7812094949647583660, guid: 714764893aa428e46a647980cd9eecd9, type: 3}
   _spawnPozition:
-  - {fileID: 6394632874235957777, guid: 71274a3fc214b164f87f079a7c29849f, type: 3}
+  - {fileID: 7660146905379440146, guid: 9b9ca4baf27a8824a93a028c0b83f1d4, type: 3}
+  - {fileID: 5981430071517298044, guid: e86752ee235a0ba418dc7ca2a9798195, type: 3}
+  - {fileID: 6173845513424742555, guid: 71f7c9f3c2cede94894cd2ff489b2e3c, type: 3}
+  - {fileID: 261322008101670320, guid: 8cbcffd93ac23c24daca97eaa6bdd024, type: 3}
