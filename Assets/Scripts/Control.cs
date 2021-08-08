@@ -5,13 +5,12 @@ public class Control : MonoBehaviour
 {
     private bool _isMouseDown = false;
     private Vector2 _startPozition;
-    private Point _point;
+    private Coordinates _coordinates;
     private bool _isJoin;
 
     public Matrix _matrix;
 
-    public Point Point { get => _point; }
-    public bool IsJoin { get => _isJoin; }
+    public Coordinates Point { get => _coordinates; }
    
     void Update()
     {
@@ -28,7 +27,6 @@ public class Control : MonoBehaviour
         }
     }
 
-
     private void OnMouseDown()
     {
         _isMouseDown = true;
@@ -38,13 +36,7 @@ public class Control : MonoBehaviour
     private void OnMouseUp()
     {
         _isMouseDown = false;
-
-        foreach (var item in gameObject.transform.parent.GetComponentsInChildren<Control>())
-        {          
-            item._point = new Point();
-            item._point.X = Mathf.RoundToInt(item.transform.localPosition.x + transform.parent.localPosition.x);
-            item._point.Y = Mathf.RoundToInt(item.transform.localPosition.y + transform.parent.localPosition.y);
-        }
+        CalculateCoordinatesFigureElements();       
 
         if (IsFigureOnMatrix(gameObject.transform.parent))
         {
@@ -55,24 +47,26 @@ public class Control : MonoBehaviour
             }
             GameEvent.Join();
         }
-
         else
         {
             transform.parent.position = _startPozition;
         }        
     }
 
-
-
-    public bool IsFigureOnMatrix(Transform parentPoz)
+    private bool IsFigureOnMatrix(Transform parentPoz)
     {
         bool isJoin = true;
 
         foreach (var item in parentPoz.transform.GetComponentsInChildren<Control>())
         {
-            bool isInside = (item.Point.X < _matrix.Gorizontal && item.Point.X >= 0 && item.Point.Y < _matrix.Vertical && item.Point.Y >= 0);
-            var c = _matrix.controls.Where(x => x.Point.X == item.Point.X && x.Point.Y == item.Point.Y).ToList();
-            if (!(isInside && c.Count == 0))
+            bool isInside = (
+                item.Point.x < _matrix.Gorizontal && 
+                item.Point.x >= 0 &&
+                item.Point.y < _matrix.Vertical &&
+                item.Point.y >= 0);
+
+            var elementWithSameCoordinates = _matrix.controls.Where(x => x.Point.x == item.Point.x && x.Point.y == item.Point.y).ToList();
+            if (!(isInside && elementWithSameCoordinates.Count == 0))
             {
                 isJoin = false;
             }
@@ -88,5 +82,15 @@ public class Control : MonoBehaviour
         }
 
         return isJoin;
+    }
+
+    private void CalculateCoordinatesFigureElements()
+    {
+        foreach (var item in gameObject.transform.parent.GetComponentsInChildren<Control>())
+        {
+            int x = Mathf.RoundToInt(item.transform.localPosition.x + transform.parent.localPosition.x);
+            int y = Mathf.RoundToInt(item.transform.localPosition.y + transform.parent.localPosition.y);
+            item._coordinates = new Coordinates(x, y);
+        }
     }
 }
