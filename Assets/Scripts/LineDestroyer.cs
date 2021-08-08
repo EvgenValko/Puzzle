@@ -8,7 +8,7 @@ public class LineDestroyer : MonoBehaviour
     private Matrix _matrix;
     public Matrix  Matrix { set => _matrix = value; }
       
-    private void FindLine()
+    private void FindLineHasFormed()
     {
         List<Control> elementsToDestroy = new List<Control>();
 
@@ -46,19 +46,18 @@ public class LineDestroyer : MonoBehaviour
         {
             _matrix.controls.Remove(item);
             Destroy(item.gameObject);
-            GameEvent.Line();
+            GameEvent.OnLineHasFormed();
             yield return new WaitForSeconds(0.02f);
         }
-        elementsToDestroy.Clear();
     }
 
     private void OnEnable()
     {
-        GameEvent.OnJoin += FindLine;
+        GameEvent.AttachToMatrix += FindLineHasFormed;
     }
 
     private void OnDisable()
     {
-        GameEvent.OnJoin += FindLine;
+        GameEvent.AttachToMatrix += FindLineHasFormed;
     }
 }

@@ -2,17 +2,17 @@
 
 public class GameEvent
 {
-    public static event Action OnJoin;
-    public static event Action OnLine;
+    public static event Action AttachToMatrix;
+    public static event Action LineHasFormed;
 
-    public static void Join()
+    public static void OnAttachToMatrix()
     {
-        OnJoin?.Invoke();
+        AttachToMatrix?.Invoke();
     }
 
-    public static void Line()
+    public static void OnLineHasFormed()
     {
-        OnLine?.Invoke();
+        LineHasFormed?.Invoke();
     }
 }  
 

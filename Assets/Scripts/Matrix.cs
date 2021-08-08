@@ -83,11 +83,11 @@ public class Matrix : MonoBehaviour
 
     private void OnEnable()
     {
-        GameEvent.OnJoin += RemuveFigure;
+        GameEvent.AttachToMatrix += RemuveFigure;
     }
 
     private void OnDisable()
     {
-        GameEvent.OnJoin -= RemuveFigure;
+        GameEvent.AttachToMatrix -= RemuveFigure;
     }
 }

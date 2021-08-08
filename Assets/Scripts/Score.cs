@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -14,11 +12,11 @@ public class Score : MonoBehaviour
     }
     private void OnEnable()
     {
-        GameEvent.OnLine += WriteScore; 
+        GameEvent.LineHasFormed += WriteScore; 
     }
     private void OnDisable()
     {
-        GameEvent.OnLine -= WriteScore;
+        GameEvent.LineHasFormed -= WriteScore;
     }
     private void WriteScore()
     {

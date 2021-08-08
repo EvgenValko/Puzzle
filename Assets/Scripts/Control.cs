@@ -43,7 +43,7 @@ public class Control : MonoBehaviour
             {
                 item._isJoin = true; 
             }
-            GameEvent.Join();
+            GameEvent.OnAttachToMatrix();
         }
         else
         {
