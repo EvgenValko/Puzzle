@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a44112d92c29334a9b8e5a2c01cb345, type: 3}
+  m_Name: New Matrix Siting
+  m_EditorClassIdentifier: 
+  _matrixElement: {fileID: 4829216400391359424, guid: 106b89e266775634aa86e87de2595ec5, type: 3}
+  _backgroundMatrix: {fileID: 2305340549250274020, guid: 50a5ce7c228fbb64ebc2f70197450236, type: 3}
+  _parent: {fileID: 6404220055718334116, guid: e4659093abfc00b409de6dd4207b9d34, type: 3}
+  _gorizontalElement: 6

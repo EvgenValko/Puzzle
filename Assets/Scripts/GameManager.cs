@@ -6,13 +6,14 @@ using System.Linq;
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get { return _instance; } }
+ 
     private static GameManager _instance = null;
-    private bool[,] _matrix;
+    private bool[,] _isElementsOnMatrix;
     private List<Control> _element = new List<Control>();
 
-
+    [SerializeField] private MatrixSiting matrixSiting;
     [SerializeField] private GameObject[] _figures;
-    [SerializeField] private Matrix _boardMatrix;
+    private Matrix _matrix;
     [SerializeField] private Transform _spawn;
 
     private void Awake()
@@ -28,9 +29,12 @@ public class GameManager : MonoBehaviour
 
     
     void Start()
-    {
-        _boardMatrix =  Instantiate(_boardMatrix);
-        _matrix = new bool[_boardMatrix.Gorizontal, _boardMatrix.Vertical];
+    {        
+        GameObject backgroundMatrix = Instantiate(matrixSiting.BackgroundMatrix.gameObject);
+        _matrix = backgroundMatrix.gameObject.AddComponent<Matrix>();
+        _matrix.Initialize(matrixSiting);
+
+        _isElementsOnMatrix = new bool[_matrix.Gorizontal, _matrix.Vertical];
         AddFigure();
     }
 
@@ -42,9 +46,9 @@ public class GameManager : MonoBehaviour
         {
             int x = item.Point.X;
             int y = item.Point.Y;
-            bool isInside = (x < _boardMatrix.Gorizontal && x >= 0 && y < _boardMatrix.Vertical && y >= 0);
+            bool isInside = (x < _matrix.Gorizontal && x >= 0 && y < _matrix.Vertical && y >= 0);
 
-            if (!(isInside && !_matrix[x, y]))
+            if (!(isInside && !_isElementsOnMatrix[x, y]))
             {
                 isJoin = false;
             }
@@ -54,7 +58,7 @@ public class GameManager : MonoBehaviour
         {
             foreach (var item in parentPoz.transform.GetComponentsInChildren<Control>())
             {
-                _matrix[item.Point.X, item.Point.Y] = true;
+                _isElementsOnMatrix[item.Point.X, item.Point.Y] = true;
                 _element.Add(item);
             }
 
@@ -67,15 +71,15 @@ public class GameManager : MonoBehaviour
     private void AddFigure()
     {
         GameObject go = Instantiate(_figures[Random.Range(0, _figures.Length)], _spawn.position, Quaternion.identity);
-        go.transform.localScale *= _boardMatrix.Scale;
-        go.transform.parent = _boardMatrix.Parent;
+        go.transform.localScale *= _matrix.Scale;
+        go.transform.parent = _matrix.Parent;
     }
 
     IEnumerator del(List<Control> controls)
     {
         foreach (var item in controls)
         {
-            _matrix[item.Point.X,item.Point.Y]= false;
+            _isElementsOnMatrix[item.Point.X,item.Point.Y]= false;
         }
 
         foreach (var item in controls)
@@ -91,25 +95,25 @@ public class GameManager : MonoBehaviour
 
     private void deletline()
     {
-        for (int i = 0; i < _matrix.GetLength(0); i++)
+        for (int i = 0; i < _isElementsOnMatrix.GetLength(0); i++)
         {
             List<Control> deletVerticalLine = _element
                    .Where(x => x.Point.X == i)
                    .OrderByDescending(x => x.Point.Y)
                    .ToList();
-            if (deletVerticalLine.Count == _matrix.GetLength(1))
+            if (deletVerticalLine.Count == _isElementsOnMatrix.GetLength(1))
             {
                 StartCoroutine(del(deletVerticalLine));
             }           
         }
 
-        for (int i = 0; i < _matrix.GetLength(1); i++)
+        for (int i = 0; i < _isElementsOnMatrix.GetLength(1); i++)
         {
             List<Control> deletGorizontalLine = _element
                     .Where(x => x.Point.Y == i)
                     .OrderBy(x => x.Point.X)
                     .ToList();
-            if (deletGorizontalLine.Count == _matrix.GetLength(0))
+            if (deletGorizontalLine.Count == _isElementsOnMatrix.GetLength(0))
             {
                 StartCoroutine(del(deletGorizontalLine)); 
             }

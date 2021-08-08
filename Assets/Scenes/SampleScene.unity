@@ -415,11 +415,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8fe7af763588f334ea612be314601e18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  matrixSiting: {fileID: 11400000, guid: e4fd82f40c8567041b09d138c087081a, type: 2}
   _figures:
   - {fileID: 3262891084027296217, guid: abaa08081a846264a8b889ee9995aac0, type: 3}
   - {fileID: 5673347399169752524, guid: de37124839a25254a93581a49ad9591b, type: 3}
   - {fileID: 4709095861466327641, guid: e10a4481d7e23884198865ca8911a72b, type: 3}
-  _boardMatrix: {fileID: 6409028576486437415, guid: 50a5ce7c228fbb64ebc2f70197450236, type: 3}
   _spawn: {fileID: 1558237454}
 --- !u!4 &1558237454 stripped
 Transform:

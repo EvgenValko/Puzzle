@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2305340549250274020}
   - component: {fileID: 3274096027826542559}
-  - component: {fileID: 6409028576486437415}
   m_Layer: 0
   m_Name: BoardMatrix
   m_TagString: Untagged
@@ -83,19 +82,3 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &6409028576486437415
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7743166339591457142}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0c5ba3639992e4540b2def7ef553ec4f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _matrixElement: {fileID: 4829216400391359424, guid: 106b89e266775634aa86e87de2595ec5, type: 3}
-  _backgroundMatrix: {fileID: 2305340549250274020}
-  _parent: {fileID: 6404220055718334116, guid: e4659093abfc00b409de6dd4207b9d34, type: 3}
-  _gorizontalElement: 6

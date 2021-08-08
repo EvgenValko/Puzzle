@@ -3,23 +3,30 @@ using UnityEngine;
 public class Matrix : MonoBehaviour
 {
 
-    [SerializeField] private GameObject _matrixElement;
-    [SerializeField] private Transform _backgroundMatrix;
-    [SerializeField] private Transform _parent;
-    [SerializeField] private int _gorizontalElement;
+    private GameObject _matrixElement;
+    private Transform _backgroundMatrix;
+    private Transform _parent;
+    private int _gorizontalElement;
     private int _verticalElement;
     private float _scale;
-    
+    private bool[,] _isElementsOnMatrix;
+
+    public bool[,] IsElementsOnMatrix { get => _isElementsOnMatrix; set => _isElementsOnMatrix = value; }
     public int Gorizontal{ get => _gorizontalElement; }
     public int Vertical { get => _verticalElement; }
     public float Scale { get => _scale; }
     public Transform Parent { get => _parent; }
-    
-    
-    private void Awake()
 
+
+
+    public void Initialize(MatrixSiting matrixSiting)
     {
-        CreateMatrix();        
+        _matrixElement = matrixSiting.MatrixElement;
+        _backgroundMatrix = matrixSiting.BackgroundMatrix;
+        _parent = matrixSiting.Parent;
+        _gorizontalElement = matrixSiting.GorizontalElement;       
+
+         CreateMatrix();
     }
 
     private void CreateMatrix()
@@ -41,5 +48,7 @@ public class Matrix : MonoBehaviour
 
         _parent.position = (Vector2)(_backgroundMatrix.localScale / 2 - _backgroundMatrix.localScale + _backgroundMatrix.position) + new Vector2(_scale, _scale) / 2;
         _parent.localScale *= _scale;
+
+        _isElementsOnMatrix = new bool[_gorizontalElement,_verticalElement];
     }    
 }
