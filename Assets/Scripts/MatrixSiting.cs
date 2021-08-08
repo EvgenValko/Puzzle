@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu]
@@ -18,5 +16,4 @@ public class MatrixSiting : ScriptableObject
     public int GorizontalElement { get => _gorizontalElement; }
     public GameObject[] Figures { get => _figures; }
     public Transform[] SpawnPozition { get => _spawnPozition; }
-
 }

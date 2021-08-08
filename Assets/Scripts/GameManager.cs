@@ -1,15 +1,11 @@
 using UnityEngine;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
 
 public class GameManager : MonoBehaviour
 {
-    public static GameManager Instance { get { return _instance; } } 
-    private static GameManager _instance = null;
-    
     [SerializeField] private MatrixSiting _matrixSiting;
-
+    private static GameManager _instance = null;
+    public static GameManager Instance { get { return _instance; } } 
+   
     private void Awake()
     {
         if (_instance)
@@ -20,8 +16,7 @@ public class GameManager : MonoBehaviour
         _instance = this;
         DontDestroyOnLoad(gameObject);
     }
-
-    
+        
     void Start()
     {        
         GameObject backgroundMatrix = Instantiate(_matrixSiting.BackgroundMatrix.gameObject);
@@ -30,5 +25,4 @@ public class GameManager : MonoBehaviour
         LineDestroyer lineDestroyer = backgroundMatrix.AddComponent<LineDestroyer>();
         lineDestroyer.Matrix = matrix;
     }
-
 }
