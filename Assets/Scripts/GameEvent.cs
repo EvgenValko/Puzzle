@@ -1,7 +1,7 @@
 ﻿using System;
 
-    public class GameEvent
-    {
+public class GameEvent
+{
     public static event Action OnJoin;
     public static event Action OnLine;
 
@@ -14,8 +14,5 @@
     {
         OnLine?.Invoke();
     }
-
-
-
-}
+}  
 

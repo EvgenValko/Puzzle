@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections.Generic;
 
 public class Matrix : MonoBehaviour
 {
@@ -9,20 +10,20 @@ public class Matrix : MonoBehaviour
     private int _gorizontalElement;
     private int _verticalElement;
     private float _scale;
-    private bool[,] _isElementsOnMatrix;
 
-    public bool[,] IsElementsOnMatrix { get => _isElementsOnMatrix; set => _isElementsOnMatrix = value; }
+    public List<Control> controls = new List<Control>();
+
+
+   
     public int Gorizontal{ get => _gorizontalElement; }
     public int Vertical { get => _verticalElement; }
     public float Scale { get => _scale; }
     public Transform Parent { get => _parent; }
 
 
-
     public void Initialize(MatrixSiting matrixSiting)
     {
-        _matrixElement = matrixSiting.MatrixElement;
-        _backgroundMatrix = matrixSiting.BackgroundMatrix;
+        _matrixElement = matrixSiting.MatrixElement;     
         _parent = matrixSiting.Parent;
         _gorizontalElement = matrixSiting.GorizontalElement;       
 
@@ -31,6 +32,8 @@ public class Matrix : MonoBehaviour
 
     private void CreateMatrix()
     {
+        _backgroundMatrix = transform;
+
         _parent = Instantiate(_parent,Vector2.zero,Quaternion.identity).transform;        
         _parent.localScale = Vector2.one;
 
@@ -48,7 +51,5 @@ public class Matrix : MonoBehaviour
 
         _parent.position = (Vector2)(_backgroundMatrix.localScale / 2 - _backgroundMatrix.localScale + _backgroundMatrix.position) + new Vector2(_scale, _scale) / 2;
         _parent.localScale *= _scale;
-
-        _isElementsOnMatrix = new bool[_gorizontalElement,_verticalElement];
     }    
 }
