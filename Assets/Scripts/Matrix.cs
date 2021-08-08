@@ -10,14 +10,11 @@ public class Matrix : MonoBehaviour
     private int _gorizontalElement;
     private int _verticalElement;
     private float _scale;
-    GameObject[] _figuresPrefab;
-    Transform[] _spawnPozition;
-
+    private GameObject[] _figuresPrefab;
+    private Transform[] _spawnPozition;
     private List<GameObject> _figures = new List<GameObject>(); 
 
-    public List<Control> controls = new List<Control>();
-
-       
+    public List<Control> controls = new List<Control>();       
     public int Gorizontal{ get => _gorizontalElement; }
     public int Vertical { get => _verticalElement; }
     
