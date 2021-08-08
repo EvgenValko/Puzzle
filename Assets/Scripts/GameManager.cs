@@ -71,7 +71,51 @@ public class GameManager : MonoBehaviour
         go.transform.parent = _boardMatrix.Parent;
     }
 
-    private void OnEnable()
+    IEnumerator del(List<Control> controls)
+    {
+        foreach (var item in controls)
+        {
+            _matrix[item.Point.X,item.Point.Y]= false;
+        }
+
+        foreach (var item in controls)
+        {
+            _element.Remove(item);
+            item.Delete();
+            GameEvent.Line();
+            yield return new WaitForSeconds(0.05f);
+        }
+        controls.Clear();       
+        
+    }
+
+    private void deletline()
+    {
+        for (int i = 0; i < _matrix.GetLength(0); i++)
+        {
+            List<Control> deletVerticalLine = _element
+                   .Where(x => x.Point.X == i)
+                   .OrderByDescending(x => x.Point.Y)
+                   .ToList();
+            if (deletVerticalLine.Count == _matrix.GetLength(1))
+            {
+                StartCoroutine(del(deletVerticalLine));
+            }           
+        }
+
+        for (int i = 0; i < _matrix.GetLength(1); i++)
+        {
+            List<Control> deletGorizontalLine = _element
+                    .Where(x => x.Point.Y == i)
+                    .OrderBy(x => x.Point.X)
+                    .ToList();
+            if (deletGorizontalLine.Count == _matrix.GetLength(0))
+            {
+                StartCoroutine(del(deletGorizontalLine)); 
+            }
+        }
+    }
+        private void OnEnable()
     {
         GameEvent.OnJoin += IsLine;
     }
@@ -85,70 +129,6 @@ public class GameManager : MonoBehaviour
     private void IsLine()
     {
         deletline();
-    }
-
-    IEnumerator del(List<Control> controls)
-    {
-        foreach (var item in controls)
-        {
-            _matrix[item.Point.X,item.Point.Y]= false;
-        }
-
-        foreach (var item in controls)
-        {
-            _element.Remove(item);
-            item.Delete();
-            GameEvent.Line();
-            yield return new WaitForSeconds(0.1f);
-        }
-        controls.Clear();       
-        
-    }
-
-    private void deletline()
-    {
-        for (int i = 0; i < _matrix.GetLength(0); i++)
-        {          
-            bool isVerticalLine = true;
-            for (int j = 0; j < _matrix.GetLength(1); j++)
-            {
-                if (!_matrix[i, j])
-                {
-                    isVerticalLine = false;
-                }
-            }
-
-            if (isVerticalLine)
-            {
-                List<Control> delet = _element
-                    .Where(x => x.Point.X == i)
-                    .OrderBy(x => x.Point.Y)
-                    .ToList();
-                StartCoroutine(del(delet));
-            }
-        }
-
-        for (int i = 0; i < _matrix.GetLength(1); i++)
-        {
-            bool isGorizontalLine = true;
-
-            for (int k = 0; k < _matrix.GetLength(0); k++)
-            {
-                if (!_matrix[k, i])
-                {
-                    isGorizontalLine = false;
-                }
-            }
-
-            if (isGorizontalLine)
-            {
-                List<Control> delet = _element
-                    .Where(x => x.Point.Y == i)
-                    .OrderBy(x => x.Point.X)
-                    .ToList();
-                StartCoroutine(del(delet));
-            }
-        }
     }
 
 }
