@@ -11,8 +11,7 @@ public class GameManager : MonoBehaviour
     private Matrix _matrix;
 
     [SerializeField] private MatrixSiting _matrixSiting;
-    [SerializeField] private GameObject[] _figures;    
-    [SerializeField] private Transform _spawn;
+
 
     private void Awake()
     {
@@ -30,20 +29,7 @@ public class GameManager : MonoBehaviour
     {        
         GameObject backgroundMatrix = Instantiate(_matrixSiting.BackgroundMatrix.gameObject);
         _matrix = backgroundMatrix.gameObject.AddComponent<Matrix>();
-        _matrix.Initialize(_matrixSiting);
-        AddFigure();
-    }
-
-    public void AddFigure()
-    {
-        GameObject go = Instantiate(_figures[Random.Range(0, _figures.Length)], _spawn.position, Quaternion.identity);
-        go.transform.localScale *= _matrix.Scale;
-        go.transform.parent = _matrix.Parent;
-
-        foreach (var item in go.transform.GetComponentsInChildren<Control>())
-        {
-            item._matrix = _matrix;
-        }    
+        _matrix.Initialize(_matrixSiting);     
     }
 
     IEnumerator del(List<Control> controls)

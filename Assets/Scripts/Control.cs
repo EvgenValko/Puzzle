@@ -84,7 +84,7 @@ public class Control : MonoBehaviour
             {
                 _matrix.controls.Add(item);
             }
-           GameManager.Instance.AddFigure();
+          _matrix.AddFigure();
         }
 
         return isJoin;
